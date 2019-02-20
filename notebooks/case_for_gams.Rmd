@@ -14,6 +14,8 @@ editor_options:
 This assumes the prior Rmd files have been run.  See the README file.
 
 ```{r misc_functions, message=FALSE}
+library(knitr)
+# knitr::opts_knit(root.dir = getwd())
 source('misc_functions/functions.R')
 ```
 
@@ -119,7 +121,7 @@ d = data.frame(x,y)
 
 A standard linear regression is definitely not going to capture this relationship.  As above, we could try and use polynomial regression here, e.g. fitting a quadratic or cubic function within the standard regression framework.  However, this is unrealistic at best and at worst isn't useful for complex relationships. In the following, even with a polynomial of degree 15 the fit is fairly poor in many areas, and 'wiggles' in some places where there doesn't appear to be a need to.
 
-```{r simDataPlot, message=F}
+```{r simDataPlot,message=F}
 fits = sapply(seq(3,15, 3), function(p) fitted(lm(y~poly(x,p)))) %>% 
   data.frame(x, y, .) %>% 
   gather(key=polynomial, value=fits, -x, -y) %>% 

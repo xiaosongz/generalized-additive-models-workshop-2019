@@ -35,7 +35,7 @@ qplot(data=mcycle, x=times, y=accel)
 Now fit a regression model of your choosing (e.g. using `lm` `glm` or your favorite package in lieu of `modelfunc`) and plot your predictions against it.  If you don't have any ideas, just use `lm(accel ~ times, data=mcycle)`.
 
 ```{r model0, eval=FALSE}
-model_start = modelfunc(?, data = mcycle)
+model_start = modelfunc(lm, data = mcycle)
   
 library(modelr)  # install if you don't have
 mcycle = mcycle %>% 
@@ -64,6 +64,11 @@ library(mgcv)   # part of base R so you already have it
 
 model_gam = gam(accel ~ s(times), data = mcycle)
 summary(model_gam)
+```
+
+```{r}
+model_glm = lm(accel ~ times, data = mcycle)
+summary(model_glm)
 ```
 
 The syntax is pretty easy, which is great!  This means you can more or less jump right in with your current R modeling knowledge.  However, know that there are many more possibilities for us in the future.
